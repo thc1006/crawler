@@ -1,0 +1,39 @@
+{
+  "metadata": {
+    "total_files": 102,
+    "collection_date": "2025-10-17",
+    "data_source": "output_jsons/ 目錄底下的所有 JSON 檔案",
+    "analysis_method": "Python json資料庫翻遍所有文件並進行統計",
+    "location": "/home/thc1006/dev/crawler-dcard/output_jsons/"
+  },
+  "summary": {
+    "total_articles": 102,
+    "total_content_chars": 192264,
+    "avg_content_length": 1884,
+    "min_content_length": 584,
+    "max_content_length": 2000
+  },
+  "platforms": {
+    "Dcard": 85,
+    "PTT": 9,
+    "Other": 8
+  },
+  "primary_topics": {
+    "研究生壓力": 39,
+    "心理健康與情緒": 33,
+    "求職與生涯規劃": 15,
+    "人際與孤獨": 13,
+    "教育決策（休學/轉學/輔系）": 2
+  },
+  "moderation_flags": {
+    "crisis": 58,
+    "harassment": 8,
+    "medical": 12
+  },
+  "quality_metrics": {
+    "ui_pollution_rate": 0,
+    "data_completeness": 100,
+    "valid_json_files": 102,
+    "content_coverage": 100
+  }
+}
