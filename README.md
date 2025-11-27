@@ -10,7 +10,7 @@
 
 ### 檔案放在這裡
 ```
-/home/thc1006/dev/crawler-dcard/output_jsons/
+files/
 ├── dcard__*.json (85個檔案)
 ├── ptt__*.json (9個檔案)
 └── unknown__*.json (8個檔案)
@@ -36,7 +36,7 @@
 
 ```
 第1步: 讀取資料
-├─ 一個一個開 output_jsons/ 裡的檔案
+├─ 一個一個開 files/ 裡的檔案
 ├─ 把所有 *.json 檔案讀進來
 └─ 檢查JSON格式有沒有問題
 
@@ -74,18 +74,23 @@
 
 ---
 
-## 3. 抓出來的重要欄位
+## 3. JSON欄位說明
 
 | 欄位名稱 | 資料型態 | 用來幹嘛 | 舉例 |
 |--------|--------|--------|------|
-| `domain` | 文字 | 知道是Dcard還是PTT | "www.dcard.tw" |
-| `topic_primary` | 文字 | 文章是在討論什麼 | "研究生壓力" |
-| `topic_secondary` | 列表 | 還有其他相關主題 | ["心理健康與情緒", ...] |
-| `content_text` | 文字 | 文章的真實內容 | "上大學好焦慮..." |
-| `moderation_flags` | 列表 | 這篇文章安不安全 | ["crisis"] |
-| `url` | 文字 | 原文在哪裡 | "https://www.dcard.tw/..." |
-| `summary_150zh` | 文字 | 150字的重點摘要 | "..." |
 | `source_file` | 文字 | 原始的HTML檔名 | "*.html" |
+| `url` | 文字 | 原文在哪裡 | "https://www.dcard.tw/..." |
+| `domain` | 文字 | 知道是Dcard還是PTT | "www.dcard.tw" |
+| `board_or_category` | 文字 | 看板或分類 | null |
+| `title` | 文字 | 文章標題 | "大一迷茫又焦慮" |
+| `author_display` | 文字 | 作者顯示名稱 | null |
+| `timestamp_iso` | 文字 | ISO格式時間戳 | null |
+| `language` | 文字 | 語言 | "zh-Hant" |
+| `content_text` | 文字 | 文章的真實內容 | "上大學好焦慮..." |
+| `topic_primary` | 文字 | 文章主要討論什麼 | "心理健康與情緒" |
+| `topic_secondary` | 列表 | 其他相關主題 | ["人際與孤獨", ...] |
+| `summary_150zh` | 文字 | 150字的重點摘要 | "..." |
+| `moderation_flags` | 列表 | 這篇文章安不安全 | ["crisis"] |
 
 ---
 
@@ -149,31 +154,10 @@
 ### 檔案清單
 
 ```
-analysis_report.html     (23 KB)   - 漂亮的可視化報告
-analysis_data.json       (1 KB)    - 原始資料存這裡
-ANALYSIS_METHODOLOGY.md  (這份檔)  - 怎樣分析的
+files/                   (目錄)    - 102個乾淨的JSON資料檔
+analysis_data.json       (1 KB)    - 統計分析結果
+README.md                (這份檔)  - 說明文件
 ```
-
-### 怎樣看漂亮的圖表
-
-**用瀏覽器打開**:
-```bash
-# 直接點開看
-open analysis_report.html
-
-# 或者用Python開個簡單伺服器
-python3 -m http.server 8000
-# 然後在瀏覽器打 http://localhost:8000/analysis_report.html
-```
-
-### 有什麼圖表
-
-1. **平台分佈圓餅圖** - Dcard/PTT佔比
-2. **話題分佈條狀圖** - 各話題有幾篇
-3. **內容長度直方圖** - 文章通常多長
-4. **品質指標卡片** - 重要數字一目了然
-5. **統計表格** - 詳細資料給你看
-6. **方法論說明** - 怎樣抓資料的
 
 ---
 
@@ -216,18 +200,17 @@ HTML爬蟲抓網頁
     ↓
 parse_html.py 程式處理
     ↓
-生出 output_jsons/*.json (102個檔)
+生出 files/*.json (102個檔)
     ↓
 這份分析計算統計
     ↓
-做出HTML漂亮報告
+做出分析報告
 ```
 
 ### 這樣分析的好處
 - **全部分析**: 102個檔都看過，沒有遺漏
 - **多角度**: 從平台、話題、安全等各個角度看
 - **可追溯**: 每個數字都能追回原始JSON檔
-- **互動式**: 圖表會動，點一點可以看細節
 
 ---
 
